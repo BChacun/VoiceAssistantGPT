@@ -1,15 +1,16 @@
 import pyttsx3
 import speech_recognition as sr
 import torch
-
 from gpt4all import GPT4All
 
+
+
+
+
+# Set up engines :
 gptj = GPT4All("ggml-gpt4all-j-v1.3-groovy")
-
-
-
-# Set up text-to-speech engine
 engine = pyttsx3.init()
+
 
 def speak(text):
     engine.say(text)
@@ -17,21 +18,12 @@ def speak(text):
 
 def process_input(input_text):
 
-    '''   
-    tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
-    model = GPT2LMHeadModel.from_pretrained('gpt2')
-
-    input_ids = tokenizer.encode(input_text, return_tensors='pt')
-    output = model.generate(input_ids, max_length=50, num_return_sequences=1)
-    response_text = tokenizer.decode(output[0], skip_special_tokens=True)
-    '''
     
     messages = [{"role": "user", "content": input_text}]
     response_dict = gptj.chat_completion(messages)
-
     response_text = response_dict["choices"][0]["message"]["content"]
 
-    print(response_text)
+    
 
 
 
